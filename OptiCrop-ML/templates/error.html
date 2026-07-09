@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Error - OptiCrop ML Engine{% endblock %}
+
+{% block content %}
+<section class="container py-5" style="margin-top: 5.5rem;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            
+            <!-- Error Card -->
+            <div class="glass-card p-5 text-center animated-fade-in border-danger">
+                
+                <span class="badge bg-danger text-white px-3 py-2 rounded-pill mb-4 fw-bold">
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i>VALIDATION FAILURE
+                </span>
+                
+                <div class="mb-4">
+                    <i class="fa-solid fa-circle-exclamation text-danger" style="font-size: 5rem; animation: bounce 2s infinite ease-in-out;"></i>
+                </div>
+                
+                <h2 class="fw-bold text-danger-emphasis mb-3">Invalid Input Parameters</h2>
+                <p class="text-muted mb-4">Our machine learning engine could not process the request because of the following issues:</p>
+                
+                <!-- Errors List -->
+                <div class="text-start bg-danger-subtle border border-danger-subtle rounded-3 p-4 mb-5 mx-auto" style="max-width: 600px;">
+                    <ul class="mb-0 text-danger-emphasis fw-medium" style="list-style-type: square; padding-left: 1.25rem;">
+                        {% for error in errors %}
+                            <li class="mb-2">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Back button -->
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-danger btn-outline-custom border-danger text-danger px-5 py-3 fs-5" style="background-color: transparent;">
+                        <i class="fa-solid fa-arrow-left me-2"></i>Go Back & Edit
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

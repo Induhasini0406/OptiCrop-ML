@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Result - OptiCrop ML Engine{% endblock %}
+
+{% block content %}
+<section class="container py-5" style="margin-top: 5.5rem;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            
+            <!-- Result Main Card -->
+            <div class="glass-card p-5 text-center animated-fade-in border-success">
+                
+                <span class="badge bg-success text-white px-3 py-2 rounded-pill mb-4 fw-bold">
+                    <i class="fa-solid fa-square-poll-vertical me-2"></i>OPTI-CROP INSIGHT
+                </span>
+                
+                <div class="crop-badge-container mb-3">
+                    <span class="crop-emoji">{{ emoji }}</span>
+                </div>
+                
+                <h1 class="crop-name">{{ crop }}</h1>
+                
+                {% if confidence is not none %}
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-2 mb-4 bg-light rounded-pill border">
+                    <i class="fa-solid fa-chart-line text-success"></i>
+                    <span class="fw-bold text-success-emphasis">Engine Confidence: {{ confidence }}%</span>
+                </div>
+                {% endif %}
+                
+                <div class="card bg-success-subtle border-success-subtle rounded-3 p-4 mb-5 mx-auto" style="max-width: 600px;">
+                    <div class="card-body p-1">
+                        <h5 class="fw-bold text-success-emphasis mb-2">Recommendation Recommendation</h5>
+                        <p class="mb-0 text-success-emphasis" style="font-size: 1.1rem; line-height: 1.5;">
+                            "Based on the provided soil and environmental conditions, the most suitable crop is <strong>{{ crop }}</strong>."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Summary indicators -->
+                <div class="text-start mb-5">
+                    <h5 class="fw-bold text-primary border-bottom pb-2 mb-4">
+                        <i class="fa-solid fa-clipboard-list me-2"></i>Submitted Parameters Summary
+                    </h5>
+                    
+                    <div class="row g-3">
+                        <div class="col-6 col-md-3">
+                            <div class="feature-pill">
+                                <span class="feature-pill-title">N</span>
+                                <span class="feature-pill-val">{{ inputs['N'] }}</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="feature-pill">
+                                <span class="feature-pill-title">P</span>
+                                <span class="feature-pill-val">{{ inputs['P'] }}</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="feature-pill">
+                                <span class="feature-pill-title">K</span>
+                                <span class="feature-pill-val">{{ inputs['K'] }}</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="feature-pill">
+                                <span class="feature-pill-title">pH</span>
+                                <span class="feature-pill-val">{{ inputs['ph'] }}</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-pill">
+                                <span class="feature-pill-title"><i class="fa-solid fa-temperature-three-quarters me-1"></i> Temp</span>
+                                <span class="feature-pill-val">{{ inputs['temperature'] }}°C</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="feature-pill">
+                                <span class="feature-pill-title"><i class="fa-solid fa-droplet me-1"></i> Humidity</span>
+                                <span class="feature-pill-val">{{ inputs['humidity'] }}%</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="feature-pill">
+                                <span class="feature-pill-title"><i class="fa-solid fa-cloud-rain me-1"></i> Rainfall</span>
+                                <span class="feature-pill-val">{{ inputs['rainfall'] }} mm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back button -->
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary-custom px-5 py-3 fs-5">
+                        <i class="fa-solid fa-arrow-rotate-left me-2"></i>Run Another Test
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

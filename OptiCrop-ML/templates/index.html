@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - OptiCrop Smart Optimization Engine{% endblock %}
+
+{% block content %}
+<!-- Hero Header -->
+<section class="hero-section text-center animated-fade-in">
+    <div class="container py-3">
+        <h1 class="hero-title mb-3">OptiCrop</h1>
+        <p class="hero-subtitle mb-4 px-md-5 mx-auto" style="max-width: 800px;">
+            Smart Agricultural Production Optimization Engine. Harness the power of Machine Learning to instantly identify the most suitable crop for your soil and environmental conditions.
+        </p>
+        <div class="d-flex justify-content-center gap-2">
+            <a href="#prediction-section" class="btn btn-primary-custom px-4"><i class="fa-solid fa-wand-magic-sparkles me-2"></i>Start Optimization</a>
+            <a href="{{ url_for('about') }}" class="btn btn-outline-light btn-outline-custom border-white text-white px-4"><i class="fa-solid fa-gears me-2"></i>How It Works</a>
+        </div>
+    </div>
+</section>
+
+<!-- Form/Card Section -->
+<section id="prediction-section" class="container py-5 mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <div class="glass-card p-4 p-md-5 animated-fade-in animation-delay-1">
+                <div class="text-center mb-5">
+                    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill mb-3 fw-bold">
+                        <i class="fa-solid fa-microchip me-1"></i> Random Forest Classifier Engine
+                    </span>
+                    <h2 class="fw-bold text-success-emphasis">Enter Soil & Climate Metrics</h2>
+                    <p class="text-muted">Fill out the seven indicators below to get your recommendation.</p>
+                </div>
+
+                <form id="predict-form" action="{{ url_for('predict') }}" method="POST" class="needs-validation" novalidate>
+                    
+                    <h5 class="fw-bold text-success border-bottom pb-2 mb-4">
+                        <i class="fa-solid fa-flask me-2"></i>Soil Chemistry (Nutrients & pH)
+                    </h5>
+                    
+                    <div class="row g-4 mb-4">
+                        <!-- Nitrogen -->
+                        <div class="col-md-4">
+                            <label for="N" class="form-label">Nitrogen (N)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-n"></i></span>
+                                <input type="number" step="0.1" class="form-control" id="N" name="N" placeholder="e.g., 90" required>
+                                <div class="invalid-feedback" id="N-feedback"></div>
+                            </div>
+                            <div class="input-help-text">Optimal: 0 to 150 kg/ha</div>
+                        </div>
+
+                        <!-- Phosphorus -->
+                        <div class="col-md-4">
+                            <label for="P" class="form-label">Phosphorus (P)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-p"></i></span>
+                                <input type="number" step="0.1" class="form-control" id="P" name="P" placeholder="e.g., 42" required>
+                                <div class="invalid-feedback" id="P-feedback"></div>
+                            </div>
+                            <div class="input-help-text">Optimal: 5 to 150 kg/ha</div>
+                        </div>
+
+                        <!-- Potassium -->
+                        <div class="col-md-4">
+                            <label for="K" class="form-label">Potassium (K)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-k"></i></span>
+                                <input type="number" step="0.1" class="form-control" id="K" name="K" placeholder="e.g., 43" required>
+                                <div class="invalid-feedback" id="K-feedback"></div>
+                            </div>
+                            <div class="input-help-text">Optimal: 5 to 210 kg/ha</div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mb-5">
+                        <!-- pH -->
+                        <div class="col-md-4">
+                            <label for="ph" class="form-label">Soil pH</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-droplet-slash"></i></span>
+                                <input type="number" step="0.01" class="form-control" id="ph" name="ph" placeholder="e.g., 6.5" required>
+                                <div class="invalid-feedback" id="ph-feedback"></div>
+                            </div>
+                            <div class="input-help-text">Optimal: 3.5 to 9.0</div>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold text-success border-bottom pb-2 mb-4">
+                        <i class="fa-solid fa-cloud-sun me-2"></i>Environmental/Climate Metrics
+                    </h5>
+
+                    <div class="row g-4 mb-5">
+                        <!-- Temperature -->
+                        <div class="col-md-4">
+                            <label for="temperature" class="form-label">Temperature (°C)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-temperature-three-quarters"></i></span>
+                                <input type="number" step="0.01" class="form-control" id="temperature" name="temperature" placeholder="e.g., 20.8" required>
+                                <div class="invalid-feedback" id="temperature-feedback"></div>
+                            </div>
+                            <div class="input-help-text">Optimal: 0.0 to 50.0 °C</div>
+                        </div>
+
+                        <!-- Humidity -->
+                        <div class="col-md-4">
+                            <label for="humidity" class="form-label">Humidity (%)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-cloud-showers-water"></i></span>
+                                <input type="number" step="0.01" class="form-control" id="humidity" name="humidity" placeholder="e.g., 82.0" required>
+                                <div class="invalid-feedback" id="humidity-feedback"></div>
+                            </div>
+                            <div class="input-help-text">Optimal: 10.0 to 100.0%</div>
+                        </div>
+
+                        <!-- Rainfall -->
+                        <div class="col-md-4">
+                            <label for="rainfall" class="form-label">Rainfall (mm)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-cloud-rain"></i></span>
+                                <input type="number" step="0.01" class="form-control" id="rainfall" name="rainfall" placeholder="e.g., 202.9" required>
+                                <div class="invalid-feedback" id="rainfall-feedback"></div>
+                            </div>
+                            <div class="input-help-text">Optimal: 20.0 to 300.0 mm</div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary-custom w-100 py-3 fs-5">
+                            <i class="fa-solid fa-magnifying-glass-chart me-2"></i>Predict Optimal Crop
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}About Engine - OptiCrop ML Engine{% endblock %}
+
+{% block content %}
+<section class="container py-5" style="margin-top: 5.5rem;">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            
+            <!-- Main Glass Card -->
+            <div class="glass-card p-4 p-md-5 animated-fade-in">
+                <div class="text-center mb-5">
+                    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill mb-3 fw-bold">
+                        <i class="fa-solid fa-graduation-cap me-1"></i>PROJECT DOCUMENTATION
+                    </span>
+                    <h1 class="fw-bold text-success-emphasis">About OptiCrop</h1>
+                    <p class="text-muted">Discover the technology and scientific workflow behind the agricultural optimization engine.</p>
+                </div>
+
+                <!-- Section 1: Overview -->
+                <div class="mb-5">
+                    <h3 class="fw-bold text-success border-bottom pb-2 mb-3">
+                        <i class="fa-solid fa-compass me-2"></i>Project Overview
+                    </h3>
+                    <p class="lead text-secondary" style="font-size: 1.15rem; line-height: 1.6;">
+                        OptiCrop is a decision-support dashboard designed to assist farming organizations, agricultural planners, and individual cultivators. By processing key soil chemical attributes alongside surrounding atmospheric metrics, it uses an advanced machine learning classification algorithm to identify which crop species will thrive best under the given conditions, maximizing crop yield and optimizing resource use.
+                    </p>
+                </div>
+
+                <!-- Section 2: ML Workflow -->
+                <div class="mb-5">
+                    <h3 class="fw-bold text-success border-bottom pb-2 mb-4">
+                        <i class="fa-solid fa-arrows-spin me-2"></i>Machine Learning Workflow
+                    </h3>
+                    
+                    <div class="step-item">
+                        <h5 class="fw-bold text-primary mb-2">1. Multivariant Data Collection</h5>
+                        <p class="mb-0 text-muted">
+                            Data is gathered from soil analysis sensors (Nitrogen, Phosphorus, Potassium ratios, and pH levels) as well as weather instrumentation (ambient Temperature, relative Humidity, and Rainfall levels).
+                        </p>
+                    </div>
+
+                    <div class="step-item">
+                        <h5 class="fw-bold text-primary mb-2">2. Processing & Normalization</h5>
+                        <p class="mb-0 text-muted">
+                            Raw inputs are validated client-side and backend to ensure integrity. Target crop categories ('rice', 'jute', 'coffee', etc.) are mapped into integer vectors via a fitted standard LabelEncoder.
+                        </p>
+                    </div>
+
+                    <div class="step-item">
+                        <h5 class="fw-bold text-primary mb-2">3. RandomForest Classification</h5>
+                        <p class="mb-0 text-muted">
+                            An ensemble RandomForestClassifier containing multiple decision trees evaluates the numerical inputs. It matches the multidimensional boundary rules to determine the crop with the highest statistical suitability.
+                        </p>
+                    </div>
+
+                    <div class="step-item">
+                        <h5 class="fw-bold text-primary mb-2">4. Serialization & Deployment</h5>
+                        <p class="mb-0 text-muted">
+                            The trained model and LabelEncoder are serialized via python's standard Pickle format (`.pkl`), allowing rapid sub-millisecond execution times in runtime without requiring database connectivity or retraining loops.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 3: Tech Stack -->
+                <div class="mb-4">
+                    <h3 class="fw-bold text-success border-bottom pb-2 mb-4">
+                        <i class="fa-solid fa-layer-group me-2"></i>Technology Stack
+                    </h3>
+                    
+                    <div class="row g-4 text-center">
+                        <div class="col-6 col-md-3">
+                            <div class="p-3 border rounded-3 bg-white hover-shadow transition-all">
+                                <i class="fa-brands fa-python text-primary display-5 mb-2"></i>
+                                <h6 class="fw-bold mb-0">Python 3</h6>
+                                <span class="text-muted small">Backend Core</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3 border rounded-3 bg-white hover-shadow transition-all">
+                                <i class="fa-solid fa-server text-danger display-5 mb-2"></i>
+                                <h6 class="fw-bold mb-0">Flask</h6>
+                                <span class="text-muted small">Web Framework</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3 border rounded-3 bg-white hover-shadow transition-all">
+                                <i class="fa-solid fa-brain text-warning display-5 mb-2"></i>
+                                <h6 class="fw-bold mb-0">Scikit-Learn</h6>
+                                <span class="text-muted small">Random Forest ML</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="p-3 border rounded-3 bg-white hover-shadow transition-all">
+                                <i class="fa-brands fa-bootstrap text-purple display-5 mb-2" style="color: #6f42c1;"></i>
+                                <h6 class="fw-bold mb-0">Bootstrap 5</h6>
+                                <span class="text-muted small">Responsive UI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
